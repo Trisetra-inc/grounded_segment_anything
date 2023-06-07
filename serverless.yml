@@ -1,0 +1,35 @@
+org: trisetra
+
+service: geounded-segment-anything
+
+# Framework version constraint (semver constraint): '3', '^2.33'
+frameworkVersion: "3"
+
+# Configuration validation: 'error' (fatal error), 'warn' (logged to the output) or 'off' (default: warn)
+# See https://www.serverless.com/framework/docs/configuration-validation
+configValidationMode: error
+# Load environment variables from .env files (default: false)
+# See https://www.serverless.com/framework/docs/environment-variables
+useDotenv: true
+# 'warn' reports deprecations on the go, 'error' will result with an exception being thrown on first approached deprecation
+deprecationNotificationMode: error
+
+provider:
+  name: aws
+  runtime: python3.9
+  memorySize: 10240
+  timeout: 900
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  logRetentionInDays: 90
+  iam:
+    role: arn:aws:iam::832473540695:role/service-role/DBAccessor
+  ecr:
+    # In this section you can define images that will be built locally and uploaded to ECR
+    images:
+      latest:
+        path: ./
+
+functions:
+  grounded_segment_anything:
+    image: 832473540695.dkr.ecr.us-east-1.amazonaws.com/grounded_segment_anything:latest

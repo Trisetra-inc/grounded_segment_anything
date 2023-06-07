@@ -27,7 +27,7 @@ build-image:
 	@echo $(BUILD_MESSAGE)
 	docker build --build-arg USE_CUDA=$(USE_CUDA) \
 	--build-arg TORCH_ARCH=$(TORCH_CUDA_ARCH_LIST) \
-	-t gsa:v0 .
+	-t 832473540695.dkr.ecr.us-east-1.amazonaws.com/grounded_segment_anything:latest .
 run:
 ifeq (,$(wildcard ./sam_vit_h_4b8939.pth))
 	wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
@@ -39,5 +39,5 @@ endif
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v "${PWD}":/home/appuser/working_dir \
 	-e DISPLAY=$DISPLAY \
-	--name=gsa \
-	--ipc=host -it gsa:v0
+	--name=grounded_segment_anything \
+	--ipc=host -it grounded_segment_anything:latest
