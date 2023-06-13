@@ -1,7 +1,18 @@
-import cv2
+import base64
 import boto3
+import cv2
 import requests
 import numpy as np
+
+
+def encode(img: np.ndarray, ext: str = ".jpg") -> str:
+    _, buffer = cv2.imencode(ext, img)
+    return base64.b64encode(buffer).decode("utf-8")
+
+
+def decode(img: str) -> np.ndarray:
+    buffer = base64.b64decode(img)
+    return cv2.imdecode(np.frombuffer(buffer, dtype=np.uint8), -1)
 
 
 def load_image_from_url(url: str) -> cv2.Mat:

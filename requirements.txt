@@ -1,15 +1,23 @@
+segment_anything @ git+https://github.com/facebookresearch/segment-anything@main
+groundingdino @ git+https://github.com/IDEA-Research/GroundingDINO@main
 addict
-diffusers
+diffusers[torch]==0.15.1
+fairscale
 gradio
 huggingface_hub
-matplotlib
+ipykernel==6.16.2
+matplotlib==3.5.3
+nltk
 numpy
-onnxruntime
-opencv_python
+onnx==1.13.1
+onnxruntime==1.14.1
+opencv_python==4.7.0.72
+openai
 Pillow
-pycocotools
+pycocotools==2.0.6
 PyYAML
 requests
+scipy
 setuptools
 supervision
 termcolor
@@ -18,5 +26,3 @@ torch
 torchvision
 transformers
 yapf
-nltk
-fairscale
